@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "667949652702",
+    "firebase_url": "https://breadcrumbs-c8f5e.firebaseio.com",
+    "project_id": "breadcrumbs-c8f5e",
+    "storage_bucket": "breadcrumbs-c8f5e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:667949652702:android:bb1b7bff3d904d7e0b404f",
+        "android_client_info": {
+          "package_name": "com.example.breadcrumbs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "667949652702-pa1ctoe08leqoqfjpuq2s2iq4pjaddjj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1Ky7qedObWv5mY4wNq8u3jzrloeaRxUQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "667949652702-pa1ctoe08leqoqfjpuq2s2iq4pjaddjj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "667949652702-8tk07tpslvbc9iu5g52qr4c04ou8in00.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.breadcrumbs"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
