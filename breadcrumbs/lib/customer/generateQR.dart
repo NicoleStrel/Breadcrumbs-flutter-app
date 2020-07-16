@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'dart:ui';
 import 'package:flutter/rendering.dart';
-
+import 'package:breadcrumbs/customer/auth/authentication.dart';
 
 class GenerateScreen extends StatefulWidget {
+  final BaseAuth auth;
+  final VoidCallback logoutCallback;
   final String userId;
-  GenerateScreen({this.userId});
+
+  GenerateScreen({Key key,this.auth, this.userId, this.logoutCallback}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _GenerateScreenState();
@@ -14,21 +17,23 @@ class GenerateScreen extends StatefulWidget {
 
 class _GenerateScreenState extends State<GenerateScreen> {
 
-  static const double _topSectionTopPadding = 50.0;
-  static const double _topSectionBottomPadding = 20.0;
-  static const double _topSectionHeight = 50.0;
-
   GlobalKey globalKey = new GlobalKey();
-  String _dataString = "Hello from this QR";
-  String _inputErrorText;
-  final TextEditingController _textController =  TextEditingController();
+
+
+  signOut() async {
+    try {
+      await widget.auth.signOut();
+      widget.logoutCallback();
+      print('Logged out user: $widget.userId');
+    } catch (e) {
+      print(e);
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(''),
-      ),
       body: _contentWidget(),
     );
   }
@@ -41,54 +46,46 @@ class _GenerateScreenState extends State<GenerateScreen> {
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.only(
-              top: _topSectionTopPadding,
-              left: 20.0,
-              right: 10.0,
-              bottom: _topSectionBottomPadding,
+              top: 50.0,
+              left: 5.0,
+              right: 0,
+              bottom: 25.0,
             ),
             child:  Container(
-              height: _topSectionHeight,
+              height: 70.0,
               child:  Row(
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  Expanded(
-                    child:  TextField(
-                      controller: _textController,
-                      decoration:  InputDecoration(
-                        hintText: "Enter a custom message",
-                        errorText: _inputErrorText,
-                      ),
+                  FlatButton(
+                      child: Row(children: <Widget>[
+                        Icon(
+                          Icons.arrow_back_ios
+                        ),
+                        Text (
+                          'Logout'
+                        ),
+                      ],
+                      ),  
+                      onPressed: signOut,
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10.0),
-                    child:  FlatButton(
-                      child:  Text("SUBMIT"),
-                      onPressed: () {
-                        setState((){
-                          _dataString = _textController.text;
-                          _inputErrorText = null;
-                        });
-                      },
-                    ),
-                  )
                 ],
               ),
             ),
+          ),
+          Text(
+            'Your unique QR Code is shown below.'
           ),
           Expanded(
             child:  Center(
               child: RepaintBoundary(
                 key: globalKey,
                 child: QrImage(
-                  data: _dataString,
+                  data: widget.userId, //generates QR code based on user id made by firebase
                   size: 0.5 * bodyHeight,
                   onError: (ex) {
                     print("[QR] ERROR - $ex");
-                    setState((){
-                      _inputErrorText = "Error! Maybe your input value is too long?";
-                    });
+
                   },
                 ),
               ),
@@ -99,3 +96,11 @@ class _GenerateScreenState extends State<GenerateScreen> {
     );
   }
 }
+
+/* old error call
+  //String _inputErrorText;
+                    setState((){
+                      _inputErrorText = "Error! The QR Code could not be generated, sorry.";
+                    });
+                    */
+

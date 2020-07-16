@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 class ScanScreen extends StatefulWidget {
   @override
@@ -20,8 +21,14 @@ class _ScanState extends State<ScanScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: new AppBar(
-          title: new Text('QR Code Scanner'),
+        appBar: new GradientAppBar(
+          title: new Text(
+            'QR Code Scanner',
+           style: new TextStyle(color: Colors.white),
+           ),
+          iconTheme: new IconThemeData(color: Colors.white),
+          backgroundColorStart: Colors.blue,
+          backgroundColorEnd:Colors.red[200],
         ),
         body: new Center(
           child: new Column(

@@ -49,7 +49,11 @@ class _AppLoaderState extends State<AppLoader> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: GenerateScreen(userId: widget.userId),
+      body: GenerateScreen(
+        userId: widget.userId,
+        auth: widget.auth,
+        logoutCallback: widget.logoutCallback
+        ),
       /*
       bottomNavigationBar: BottomNavigationBar(
           onTap: (index) => changeTab(index),

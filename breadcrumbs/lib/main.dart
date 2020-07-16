@@ -16,8 +16,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         brightness: Brightness.light,
         primaryColor: Colors.white,
-        accentColor: Colors.blueAccent[300],
+        accentColor: Colors.white,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+
       ),
       home: HomeScreen(),
     );
