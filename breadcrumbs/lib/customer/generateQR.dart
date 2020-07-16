@@ -18,21 +18,22 @@ class GenerateScreen extends StatefulWidget {
 class _GenerateScreenState extends State<GenerateScreen> {
 
   GlobalKey globalKey = new GlobalKey();
-
+  
 
   signOut() async {
     try {
       await widget.auth.signOut();
       widget.logoutCallback();
-      print('Logged out user: $widget.userId');
+      String message="Logged out user: "+widget.userId;
+      print(message);
     } catch (e) {
       print(e);
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       body: _contentWidget(),
     );

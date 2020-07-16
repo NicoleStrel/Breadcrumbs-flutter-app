@@ -20,6 +20,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> with SingleTickerProv
   String _email;
   String _password;
   String _errorMessage;
+  String _signedUpMessage;
   TabController tabController;
   int _currentIndex = 0;
 
@@ -53,9 +54,11 @@ class _LoginSignupPageState extends State<LoginSignupPage> with SingleTickerProv
           //widget.auth.sendEmailVerification();
           //_showVerifyEmailSentDialog();
           print('Signed up user: $userId');
+          
         }
         setState(() {
           _isLoading = false;
+          _signedUpMessage="You succesfully signed up! Please log in to continue.";
         });
 
         if (userId.length > 0 && userId != null && login) {
@@ -75,6 +78,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> with SingleTickerProv
   @override
   void initState() {
     _errorMessage = "";
+    _signedUpMessage="";
     _isLoading = false;
     _isLoginForm = true;
     super.initState();
@@ -148,14 +152,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> with SingleTickerProv
         ),
       );
   }
-   _handleTabSelection() {
-      setState(() {
-        _currentIndex = tabController.index;
-        _isLoginForm=!_isLoginForm;
-      });
-      print(_currentIndex);
-      print (_isLoginForm); 
-  }
+
 
   Widget getIconBar(){
     return Container(
@@ -257,6 +254,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> with SingleTickerProv
                   showPasswordInput(false),
                   showPrimaryButton(false, _formKey2),
                   showErrorMessage(),
+                  showSignedUpMessage(),
                 ],
               ),
             )
@@ -267,14 +265,37 @@ class _LoginSignupPageState extends State<LoginSignupPage> with SingleTickerProv
 
   Widget showErrorMessage() {
     if (_errorMessage.length > 0 && _errorMessage != null) {
-      return new Text(
+      return Container( 
+        margin: EdgeInsets.only(top:10),
+        child: Center(
+         child: new Text(
         _errorMessage,
         style: TextStyle(
             fontSize: 13.0,
             color: Colors.red,
             height: 1.0,
             fontWeight: FontWeight.w300),
+      )));
+    } else {
+      return new Container(
+        height: 0.0,
       );
+    }
+  }
+
+  Widget showSignedUpMessage() {
+    if (_signedUpMessage.length > 0 && _signedUpMessage != null) {
+      return Container( 
+        margin: EdgeInsets.only(top:10),
+        child: Center(
+         child: new Text(
+        _signedUpMessage,
+        style: TextStyle(
+            fontSize: 15.0,
+            color: Colors.black,
+            height: 1.0,
+            fontWeight: FontWeight.w300),
+      )));
     } else {
       return new Container(
         height: 0.0,
