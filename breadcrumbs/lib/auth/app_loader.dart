@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:breadcrumbs/customer/auth/authentication.dart';
+import 'package:breadcrumbs/auth/authentication.dart';
 import 'package:breadcrumbs/customer/generateQR.dart';
 
 

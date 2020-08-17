@@ -1,7 +1,7 @@
-import 'package:breadcrumbs/customer/auth/authentication.dart';
+import 'package:breadcrumbs/auth/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:breadcrumbs/buisness/scanQR.dart';
-import 'package:breadcrumbs/customer/auth/auth_root.dart';
+import 'package:breadcrumbs/customer/auth-c/auth_root.dart';
 import 'package:flutter/rendering.dart';
 
 

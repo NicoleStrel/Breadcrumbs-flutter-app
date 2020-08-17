@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'dart:ui';
 import 'package:flutter/rendering.dart';
-import 'package:breadcrumbs/customer/auth/authentication.dart';
+import 'package:breadcrumbs/auth/authentication.dart';
 import 'package:animated_dialog_box/animated_dialog_box.dart';
 
 class GenerateScreen extends StatefulWidget {
@@ -119,7 +119,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                 child: new Text(
                     'I have covid-19',
                     style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300, color: Colors.white)),
-                onPressed: ()=> showPopup(context), //When pressed, send out emails to all restaurants the user interacted with
+                onPressed: ()=> showPopup(context), //When pressed, send out emails to all restaurants the user interacted with!
               )
           ),
         ],
@@ -130,30 +130,28 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
 void showPopup(BuildContext context) async {
   await animated_dialog_box.showCustomAlertBox(
-                      context: context,
-                      firstButton:  Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            MaterialButton(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(40),
-                              ),
-                              color: Color(0xff67dbd5),
-                              child: Text(
-                                'Ok',
-                                style:TextStyle(color: Colors.white),
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                          ],
-                        ),
-                        yourWidget: Container(
-                          child: Text('Thank you for reporting. Take care and quarantine for two weeks.',
-                            textAlign: TextAlign.center),
-                        ));
-
-
+    context: context,
+    firstButton:  Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          MaterialButton(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(40),
+            ),
+            color: Color(0xff67dbd5),
+            child: Text(
+              'Ok',
+              style:TextStyle(color: Colors.white),
+            ),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      ),
+      yourWidget: Container(
+        child: Text('Thank you for reporting. Take care and quarantine for two weeks.',
+          textAlign: TextAlign.center),
+      ));
 }
 

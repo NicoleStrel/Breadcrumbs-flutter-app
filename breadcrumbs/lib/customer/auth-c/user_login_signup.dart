@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:breadcrumbs/customer/auth/authentication.dart';
+import 'package:breadcrumbs/auth/authentication.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 
