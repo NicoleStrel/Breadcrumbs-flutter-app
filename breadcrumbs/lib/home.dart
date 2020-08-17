@@ -13,33 +13,43 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
         //backgroundColor: Colors.blue[400],
         body: Container(
+          /*
           decoration:BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               colors: [Colors.blue, Colors.red[200]],
             )
-          ),
+          ),*/
+          color: Colors.white,
           child: Column( //need to delete
               children: <Widget>[
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    Hero(
-                  tag: 'hero',
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(0.0, .0, 0.0, 20.0),
-                    child: Image.asset(
-                        'assets/Breadcrums.png',
-                        
-                        ),
+                  Hero(
+                    tag: 'hero',
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(0.0, 40.0, 20.0, 10.0),
+                      child: Image.asset(
+                          'assets/Breadcrums.png',
+                          
+                          ),
+                    ), 
                   ),
-                ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0.0, 00.0, 00.0, 40.0),
+                    child: Text(
+                        '[Description/ intro goes here]',
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                  ),
                     //buttons
                     Container(
                       margin: new EdgeInsets.only(left: 10.0,right: 10.0),
                       child: new FlatButton(
-                          color: Colors.white,
+                          color: Color(0xffeb433a),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18.0),
                               side: BorderSide(color: Colors.white),
@@ -48,7 +58,7 @@ class HomeScreen extends StatelessWidget {
 
                           child: new Text(
                               'Customer',
-                              style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300, color: Colors.blue[400])),
+                              style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300, color: Colors.white)),
                           onPressed: () {
                               Navigator.push(
                                 context,
@@ -60,7 +70,7 @@ class HomeScreen extends StatelessWidget {
                       Container(
                       margin: new EdgeInsets.only(left: 10.0,right: 10.0, top:15.0),
                       child: new FlatButton(
-                          color: Colors.white,
+                          color: Color(0xff67dbd5),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18.0),
                               side: BorderSide(color: Colors.white)
@@ -68,7 +78,7 @@ class HomeScreen extends StatelessWidget {
                           padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
                           child: new Text(
                               'Buisness',
-                              style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300, color: Colors.blue[400])),
+                              style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300, color: Colors.white)),
                           onPressed: () {
                               Navigator.push(
                                 context,

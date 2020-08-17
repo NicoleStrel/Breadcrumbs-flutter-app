@@ -42,7 +42,7 @@ class _ScanState extends State<ScanScreen> {
                     textColor: Colors.white,
                     splashColor: Colors.blueGrey,
                     onPressed: scan,
-                    child: const Text('START CAMERA SCAN')
+                    child: const Text('SCAN')
                 ),
               )
               ,

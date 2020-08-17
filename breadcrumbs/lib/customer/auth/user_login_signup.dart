@@ -128,12 +128,12 @@ class _LoginSignupPageState extends State<LoginSignupPage> with SingleTickerProv
           preferredSize: Size.fromHeight(170), // here the desired height
           child: new GradientAppBar(
             title: new Text(
-              'Breadcrumbs',
+              'BreadCrumbs',
             style: new TextStyle(color: Colors.white),
             ),
             iconTheme: new IconThemeData(color: Colors.white),
-            backgroundColorStart: Colors.blue,
-            backgroundColorEnd:Colors.red[200],
+            backgroundColorStart: Color(0xffeb433a),
+            backgroundColorEnd: Color(0xff70f3ec),
             flexibleSpace: SafeArea(
               child: Column(
                 children: <Widget>[
@@ -315,7 +315,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> with SingleTickerProv
             hintText: 'Email',
             icon: new Icon(
               Icons.mail,
-              color: login? Colors.blue[300]:Colors.red[200],
+              color: login? Color(0xffeb433a):Color(0xff67dbd5),
             )),
         validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
         onSaved: (value) => _email = value.trim(),
@@ -334,25 +334,13 @@ class _LoginSignupPageState extends State<LoginSignupPage> with SingleTickerProv
             hintText: 'Password',
             icon: new Icon(
               Icons.lock,
-              color: login? Colors.blue[300]:Colors.red[200],
+              color: login? Color(0xffeb433a):Color(0xff67dbd5),
             )),
         validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
         onSaved: (value) => _password = value.trim(),
       ),
     );
   }
-/*
-  Widget showSecondaryVal() {
-    return Container(
-        margin: EdgeInsets.only(top:10),
-       child:Center(
-        child: new Text(
-            _isLoginForm ? "Don't have an account? Login!" : 'Have an account? Sign in!',
-            style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300)),
-      )
-    );;
-  }
-  */
 
   Widget showPrimaryButton(bool login, GlobalKey<FormState> key) {
     return Container(
@@ -365,7 +353,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> with SingleTickerProv
             elevation: 0.0,
             shape: new RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(30.0)),
-            color: login? Colors.blue[400]: Colors.red[300],
+            color: login? Color(0xffeb433a): Color(0xff67dbd5),
             child: new Text(login ? 'Login' : 'Create account',
                 style: new TextStyle(fontSize: 20.0, color: Colors.white)),
             onPressed: () =>validateAndSubmit(login, key),

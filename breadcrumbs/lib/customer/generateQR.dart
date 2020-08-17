@@ -3,6 +3,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'dart:ui';
 import 'package:flutter/rendering.dart';
 import 'package:breadcrumbs/customer/auth/authentication.dart';
+import 'package:animated_dialog_box/animated_dialog_box.dart';
 
 class GenerateScreen extends StatefulWidget {
   final BaseAuth auth;
@@ -74,9 +75,22 @@ class _GenerateScreenState extends State<GenerateScreen> {
               ),
             ),
           ),
-          Text(
-            'Your unique QR Code is shown below.'
-          ),
+          Padding(
+              padding: EdgeInsets.fromLTRB(00.0, 00.0, 00.0, 30.0),
+              child: Text.rich(
+              TextSpan(
+                  text: 'Welcome to BreadCrumbs!',
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color:Color(0xff67dbd5)),
+              )
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
+              child: Text(
+                  'Your unique QR Code is shown below. Scan it when you visit restaurants.',
+                  textAlign: TextAlign.center,
+                ),
+            ),
           Expanded(
             child:  Center(
               child: RepaintBoundary(
@@ -92,16 +106,54 @@ class _GenerateScreenState extends State<GenerateScreen> {
               ),
             ),
           ),
+          Container(
+            margin: new EdgeInsets.only(left: 60.0,right: 60.0),
+            child: new FlatButton(
+                color: Color(0xffeb433a),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                    side: BorderSide(color: Colors.white),
+                ),
+                padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 60.0),
+
+                child: new Text(
+                    'I have covid-19',
+                    style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300, color: Colors.white)),
+                onPressed: ()=> showPopup(context), //When pressed, send out emails to all restaurants the user interacted with
+              )
+          ),
         ],
       ),
     );
   }
 }
 
-/* old error call
-  //String _inputErrorText;
-                    setState((){
-                      _inputErrorText = "Error! The QR Code could not be generated, sorry.";
-                    });
-                    */
+void showPopup(BuildContext context) async {
+  await animated_dialog_box.showCustomAlertBox(
+                      context: context,
+                      firstButton:  Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            MaterialButton(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(40),
+                              ),
+                              color: Color(0xff67dbd5),
+                              child: Text(
+                                'Ok',
+                                style:TextStyle(color: Colors.white),
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        ),
+                        yourWidget: Container(
+                          child: Text('Thank you for reporting. Take care and quarantine for two weeks.',
+                            textAlign: TextAlign.center),
+                        ));
+
+
+}
 
