@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:breadcrumbs/customer/auth-c/user_login_signup.dart';
+import 'package:breadcrumbs/buisness/auth-b/login.dart';
 import 'package:breadcrumbs/authentication.dart';
-import 'package:breadcrumbs/customer/auth-c/app_loader.dart';
+import 'package:breadcrumbs/buisness/auth-b/app_loader.dart';
 
 enum AuthStatus {
   NOT_DETERMINED,
@@ -9,16 +9,16 @@ enum AuthStatus {
   LOGGED_IN,
 }
 
-class RootPage extends StatefulWidget {
-  RootPage({this.auth});
+class RootPageB extends StatefulWidget {
+  RootPageB({this.auth});
 
   final BaseAuth auth;
 
   @override
-  State<StatefulWidget> createState() => new _RootPageState();
+  State<StatefulWidget> createState() => new _RootPageBState();
 }
 
-class _RootPageState extends State<RootPage> {
+class _RootPageBState extends State<RootPageB> {
   AuthStatus authStatus = AuthStatus.NOT_DETERMINED;
   String _userId = "";
 
@@ -70,7 +70,7 @@ class _RootPageState extends State<RootPage> {
         return buildWaitingScreen();
         break;
       case AuthStatus.NOT_LOGGED_IN:
-        return new LoginSignupPage(
+        return new LoginPage(
           auth: widget.auth,
           loginCallback: loginCallback,
         );

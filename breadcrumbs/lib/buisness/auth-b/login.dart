@@ -3,17 +3,17 @@ import 'package:breadcrumbs/authentication.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 
-class LoginSignupPage extends StatefulWidget {
-  LoginSignupPage({this.auth, this.loginCallback});
+class LoginPage extends StatefulWidget {
+  LoginPage({this.auth, this.loginCallback});
 
   final BaseAuth auth;
   final VoidCallback loginCallback;
 
   @override
-  State<StatefulWidget> createState() => new _LoginSignupPageState();
+  State<StatefulWidget> createState() => new _LoginPageState();
 }
 
-class _LoginSignupPageState extends State<LoginSignupPage> with SingleTickerProviderStateMixin {
+class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixin {
   final _formKey = new GlobalKey<FormState>();
   final _formKey2 = new GlobalKey<FormState>();
 
@@ -133,12 +133,12 @@ class _LoginSignupPageState extends State<LoginSignupPage> with SingleTickerProv
             ),
             iconTheme: new IconThemeData(color: Colors.white),
             backgroundColorStart: Color(0xffeb433a),
-            backgroundColorEnd: Color(0xff70f3ec),
+            backgroundColorEnd: Color(0xffeb433a),
             flexibleSpace: SafeArea(
               child: Column(
                 children: <Widget>[
                   getIconBar(),
-                  getTabBar(),
+                  makeTab(),
                 ],
               ),
             ),
@@ -165,7 +165,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> with SingleTickerProv
           Opacity(
           opacity: _isLoginForm ? 1.0 : 0.5,
           child: Padding(
-              padding:EdgeInsets.only(right: MediaQuery.of(context).size.width/5),
+              padding:EdgeInsets.only(right: 0),  //MediaQuery.of(context).size.width/5
               child:Icon(
                   Icons.lock,
                   color:Colors.white,
@@ -173,41 +173,29 @@ class _LoginSignupPageState extends State<LoginSignupPage> with SingleTickerProv
                 ),
             ),
           ),
-          //sign up icon
-          Opacity(
-          opacity: _isLoginForm ? 0.5 : 1.0,
-          child:Padding(
-            padding:EdgeInsets.only(left: MediaQuery.of(context).size.width/5),
-            child: Icon(
-              Icons.person_add,
-              color:Colors.white,
-              size: 35,
-              ),
-            ),
-            ),
           ],
         ),
       );
   }
-  Widget getTabBar() {
+  Widget makeTab(){
     return Container(
-      margin: const EdgeInsets.only(top:15),
-      child: TabBar(
-        controller: tabController, 
-        labelColor: Colors.black,
-        tabs: [
-          Tab(
-            text: "Login",
-            ),
-          Tab(text: "Sign Up")
-        ],
-        indicatorSize: TabBarIndicatorSize.tab,
-        indicator: new BubbleTabIndicator(
-        indicatorHeight: 25.0,
-        indicatorColor: Colors.white,
-        tabBarIndicatorSize: TabBarIndicatorSize.tab,
-      )
-      )
+      margin: const EdgeInsets.only( top:20),
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+        child: SizedBox(
+          height: 25.0,
+          width: 150.0,
+          child: new RaisedButton(
+            elevation: 0.0,
+            shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(30.0)),
+            color: Colors.white,
+            child: new Text('Login' ,
+                style: new TextStyle(fontSize: 13.0, color: Colors.black)),
+            onPressed: () =>{},
+          ),
+        )
+        )
     );
   }
 
@@ -225,14 +213,13 @@ class _LoginSignupPageState extends State<LoginSignupPage> with SingleTickerProv
     return TabBarView(controller: tabController, children: <Widget>[
         //login
         Container(
-
             padding: EdgeInsets.all(16.0),
             child: new Form(
               key: _formKey,
               child: new ListView(
                 shrinkWrap: true,
                 children: <Widget>[
-                  //showLogo(),
+                  showIntroText(),
                   showEmailInput(true),
                   showPasswordInput(true),
                   showPrimaryButton(true, _formKey),
@@ -249,7 +236,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> with SingleTickerProv
               child: new ListView(
                 shrinkWrap: true,
                 children: <Widget>[
-                  //showLogo(),
+
                   showEmailInput(false),
                   showPasswordInput(false),
                   showPrimaryButton(false, _formKey2),
@@ -282,7 +269,17 @@ class _LoginSignupPageState extends State<LoginSignupPage> with SingleTickerProv
       );
     }
   }
-
+  Widget showIntroText() {
+    return Padding(
+      padding:EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
+      child:  Center(
+        child:Text(
+        'Login with your employee account for your buisness.',
+        textAlign: TextAlign.center,
+          ),
+      )
+    );
+  }
   Widget showSignedUpMessage() {
     if (_signedUpMessage.length > 0 && _signedUpMessage != null) {
       return Container( 
@@ -306,7 +303,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> with SingleTickerProv
 
   Widget showEmailInput(bool login) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0.0, 100.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 50.0, 0.0, 0.0),
       child: new TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.emailAddress,

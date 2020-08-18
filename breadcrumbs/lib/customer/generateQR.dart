@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'dart:ui';
 import 'package:flutter/rendering.dart';
-import 'package:breadcrumbs/auth/authentication.dart';
+import 'package:breadcrumbs/authentication.dart';
 import 'package:animated_dialog_box/animated_dialog_box.dart';
 
 class GenerateScreen extends StatefulWidget {

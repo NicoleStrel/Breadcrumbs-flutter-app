@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:breadcrumbs/auth/authentication.dart';
-import 'package:breadcrumbs/customer/generateQR.dart';
-
+import 'package:breadcrumbs/authentication.dart';
+import 'package:breadcrumbs/buisness/scanQR.dart';
 
 class AppLoader extends StatefulWidget {
   AppLoader({Key key, this.auth, this.userId, this.logoutCallback}) : super(key: key);
@@ -49,7 +48,7 @@ class _AppLoaderState extends State<AppLoader> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: GenerateScreen(
+      body: ScanScreen(
         userId: widget.userId,
         auth: widget.auth,
         logoutCallback: widget.logoutCallback

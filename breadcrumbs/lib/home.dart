@@ -1,7 +1,7 @@
-import 'package:breadcrumbs/auth/authentication.dart';
+import 'package:breadcrumbs/authentication.dart';
 import 'package:flutter/material.dart';
-import 'package:breadcrumbs/buisness/scanQR.dart';
 import 'package:breadcrumbs/customer/auth-c/auth_root.dart';
+import 'package:breadcrumbs/buisness/auth-b/auth_root.dart';
 import 'package:flutter/rendering.dart';
 
 
@@ -82,7 +82,7 @@ class HomeScreen extends StatelessWidget {
                           onPressed: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => ScanScreen()),
+                                MaterialPageRoute(builder: (context) => RootPageB(auth: new Auth())),
                               );
                           },
                         ),
