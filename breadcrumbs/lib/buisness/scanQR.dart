@@ -3,7 +3,7 @@ import 'package:breadcrumbs/authentication.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gradient_app_bar/gradient_app_bar.dart';
+import 'package:animated_dialog_box/animated_dialog_box.dart';
 
 class ScanScreen extends StatefulWidget {
   final BaseAuth auth;
@@ -72,7 +72,7 @@ class _ScanState extends State<ScanScreen> {
                         ),
                       ],
                       ),  
-                      onPressed: signOut,
+                      onPressed: showLogoutPopup,
                     ),
                 ],
               ),
@@ -116,37 +116,50 @@ class _ScanState extends State<ScanScreen> {
       setState(() => this.barcode = 'Unknown error: $e');
     }
   }
+  void showLogoutPopup() async {
+  await animated_dialog_box.showCustomAlertBox(
+    context: context,
+    firstButton: 
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            margin: EdgeInsets.only(right: 10.0),
+            child:MaterialButton(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(40),
+            ),
+            color: Color(0xffeb433a),
+            child: Text(
+              'Cancel',
+              style:TextStyle(color: Colors.white),
+            ),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          )),
+          MaterialButton(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(40),
+            ),
+            color: Color(0xff67dbd5),
+            child: Text(
+              'Logout',
+              style:TextStyle(color: Colors.white),
+            ),
+            onPressed: (){
+              Navigator.of(context).pop(); 
+              signOut();
+            }
+          ),
+        ],
+      ),
+      
+      yourWidget: Container(
+        child: Text('Are you sure you want to logout?',
+          textAlign: TextAlign.center),
+      ));
+  }
 }
 
-/*appBar: new GradientAppBar(
-          title: new Text(
-            'QR Code Scanner',
-           style: new TextStyle(color: Colors.white),
-           ),
-          iconTheme: new IconThemeData(color: Colors.white),
-          backgroundColorStart: Colors.blue,
-          backgroundColorEnd:Colors.red[200],
-        ),
-        body: new Center(
-          child: new Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                child: RaisedButton(
-                    color: Colors.blue,
-                    textColor: Colors.white,
-                    splashColor: Colors.blueGrey,
-                    onPressed: scan,
-                    child: const Text('SCAN')
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                child: Text(barcode, textAlign: TextAlign.center,),
-              ),
-              
-            ],
-          ),
-        )*/

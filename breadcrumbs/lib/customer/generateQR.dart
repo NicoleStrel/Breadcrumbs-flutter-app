@@ -27,6 +27,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
       widget.logoutCallback();
       String message="Logged out user: "+widget.userId;
       print(message);
+
     } catch (e) {
       print(e);
     }
@@ -69,7 +70,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                         ),
                       ],
                       ),  
-                      onPressed: signOut,
+                      onPressed: showLogoutPopup,
                     ),
                 ],
               ),
@@ -85,14 +86,13 @@ class _GenerateScreenState extends State<GenerateScreen> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
+              padding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 60.0),
               child: Text(
                   'Your unique QR Code is shown below. Scan it when you visit restaurants.',
                   textAlign: TextAlign.center,
                 ),
             ),
-          Expanded(
-            child:  Center(
+           Center(
               child: RepaintBoundary(
                 key: globalKey,
                 child: QrImage(
@@ -100,12 +100,11 @@ class _GenerateScreenState extends State<GenerateScreen> {
                   size: 0.5 * bodyHeight,
                   onError: (ex) {
                     print("[QR] ERROR - $ex");
-
                   },
                 ),
               ),
             ),
-          ),
+          
           Container(
             margin: new EdgeInsets.only(left: 60.0,right: 60.0),
             child: new FlatButton(
@@ -125,6 +124,51 @@ class _GenerateScreenState extends State<GenerateScreen> {
         ],
       ),
     );
+  }
+  void showLogoutPopup() async {
+  await animated_dialog_box.showCustomAlertBox(
+    context: context,
+    firstButton: 
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            margin: EdgeInsets.only(right: 10.0),
+            child:MaterialButton(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(40),
+            ),
+            color: Color(0xffeb433a),
+            child: Text(
+              'Cancel',
+              style:TextStyle(color: Colors.white),
+            ),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          )),
+          MaterialButton(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(40),
+            ),
+            color: Color(0xff67dbd5),
+            child: Text(
+              'Logout',
+              style:TextStyle(color: Colors.white),
+            ),
+            onPressed: (){
+              Navigator.of(context).pop();
+              signOut();
+            }
+          ),
+        ],
+      ),
+      
+      yourWidget: Container(
+        child: Text('Are you sure you want to logout?',
+          textAlign: TextAlign.center),
+      ));
   }
 }
 
@@ -154,4 +198,5 @@ void showPopup(BuildContext context) async {
           textAlign: TextAlign.center),
       ));
 }
+
 
