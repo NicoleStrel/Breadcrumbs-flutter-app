@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:breadcrumbs/authentication.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginSignupPage extends StatefulWidget {
   LoginSignupPage({this.auth, this.loginCallback});
@@ -16,6 +17,7 @@ class LoginSignupPage extends StatefulWidget {
 class _LoginSignupPageState extends State<LoginSignupPage> with SingleTickerProviderStateMixin {
   final _formKey = new GlobalKey<FormState>();
   final _formKey2 = new GlobalKey<FormState>();
+  final databaseReference = Firestore.instance;
 
   String _email;
   String _password;
@@ -26,6 +28,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> with SingleTickerProv
 
   bool _isLoginForm;
   bool _isLoading;
+  bool _registration;
 
   // Check if form is valid before perform login or signup
   bool validateAndSave(GlobalKey<FormState> key) {
@@ -51,6 +54,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> with SingleTickerProv
           print('Signed in: $userId');
         } else {
           userId = await widget.auth.signUp(_email, _password);
+          createRecord(userId);
           //widget.auth.sendEmailVerification();
           //_showVerifyEmailSentDialog();
           print('Signed up user: $userId');
@@ -81,6 +85,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> with SingleTickerProv
     _signedUpMessage="";
     _isLoading = false;
     _isLoginForm = true;
+    _registration = false;
     super.initState();
     tabController = TabController(length: 2, vsync: this);
     //tabController.addListener(_handleTabSelection);
@@ -105,18 +110,21 @@ class _LoginSignupPageState extends State<LoginSignupPage> with SingleTickerProv
     super.dispose();
   }
 
-/*
-  void resetForm() {
-    _formKey.currentState.reset();
-    _errorMessage = "";
+  void createRecord(String  userId) async {
+      await databaseReference.collection("customers")
+        .document(userId)
+        .setData({
+          'email': _email,
+          'covid_timestamp': '',
+          'has_covid': false,
+          'had_covid': false,
+          'restaurants_visited': FieldValue.arrayUnion([""]),
+        });
+      setState(() {
+        _registration = true;
+      });
   }
-  void toggleFormMode() {
-    resetForm();
-    setState(() {
-      _isLoginForm = !_isLoginForm;
-    });
-  }
-  */
+  
    
 
   @override
@@ -284,12 +292,12 @@ class _LoginSignupPageState extends State<LoginSignupPage> with SingleTickerProv
   }
 
   Widget showSignedUpMessage() {
-    if (_signedUpMessage.length > 0 && _signedUpMessage != null) {
+    if (_signedUpMessage.length > 0 && _signedUpMessage != null && _registration) {
       return Container( 
         margin: EdgeInsets.only(top:10),
         child: Center(
          child: new Text(
-        _signedUpMessage,
+        _signedUpMessage, 
         style: TextStyle(
             fontSize: 15.0,
             color: Colors.black,

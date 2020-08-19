@@ -132,8 +132,8 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
             style: new TextStyle(color: Colors.white),
             ),
             iconTheme: new IconThemeData(color: Colors.white),
-            backgroundColorStart: Color(0xffeb433a),
-            backgroundColorEnd: Color(0xffeb433a),
+            backgroundColorStart: Color(0xff67dbd5),
+            backgroundColorEnd: Color(0xff67dbd5),
             flexibleSpace: SafeArea(
               child: Column(
                 children: <Widget>[

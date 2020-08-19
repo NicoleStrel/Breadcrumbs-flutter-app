@@ -29,6 +29,7 @@ dependencies:
   bubble_tab_indicator: "^0.1.4"
   firebase_auth: ^0.16.1
   firebase_database: ^3.1.6
+  cloud_firestore: ^0.13.7
   path_provider: 0.4.1
   barcode_scan: ^0.0.4
   qr_flutter:
