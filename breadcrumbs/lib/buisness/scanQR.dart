@@ -151,7 +151,7 @@ class _ScanState extends State<ScanScreen> {
                           );
                         }
                         else{
-                          return Text("(Error- buisness not found)", style: TextStyle(color:Color(0xffeb433a)));
+                          return Text("(Error- Buisness not found)", style: TextStyle(color:Color(0xffeb433a)));
                         }
                         
                       }
@@ -307,10 +307,13 @@ class _ScanState extends State<ScanScreen> {
                           _tables.add(alltables[i]["name"]);
                         }
                       }
+                      
+                      if (_tables.length ==0){ //if still empty:
+                         return Text("(Error- Business not found)" , style: TextStyle(color:Color(0xffeb433a)));
+                      }
                       _selectedTable=_tables[0];
                       
                     }
-                    
                     print (_tables);
                     print ('selected: $_selectedTable');
                     return DropdownButtonFormField<String>(
