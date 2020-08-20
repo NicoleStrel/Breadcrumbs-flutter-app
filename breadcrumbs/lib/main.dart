@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Breadcrumbs',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
         brightness: Brightness.light,
         primaryColor: Colors.white,
         accentColor: Colors.white,
