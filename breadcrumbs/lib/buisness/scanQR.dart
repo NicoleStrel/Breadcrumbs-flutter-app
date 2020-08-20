@@ -204,7 +204,7 @@ class _ScanState extends State<ScanScreen> {
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-              child: Text(barcode, textAlign: TextAlign.center,),
+              child: Text(barcode, textAlign: TextAlign.center, style:  TextStyle(color:Color(0xffeb433a))),
             ),
           ],
         )
@@ -214,8 +214,9 @@ class _ScanState extends State<ScanScreen> {
   }
   Future scan() async {
     try {
-      String barcode = await BarcodeScanner.scan(); //need to test out what this returns
-      setState(() => this.barcode = barcode);
+      String barcode = await BarcodeScanner.scan(); //returns the userID!
+      String combined= 'Registered user ' +barcode;
+      setState(() => this.barcode = combined); //register this info in the database here
     } on PlatformException catch (e) {
       if (e.code == BarcodeScanner.CameraAccessDenied) {
         setState(() {
