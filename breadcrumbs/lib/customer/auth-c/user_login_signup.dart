@@ -130,7 +130,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> with SingleTickerProv
   @override
   Widget build(BuildContext context) {
 
-    return new Scaffold(
+    return new Scaffold( //_isLoginForm ?
         backgroundColor: Colors.white,
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(170), // here the desired height
@@ -140,8 +140,8 @@ class _LoginSignupPageState extends State<LoginSignupPage> with SingleTickerProv
             style: new TextStyle(color: Colors.white),
             ),
             iconTheme: new IconThemeData(color: Colors.white),
-            backgroundColorStart: Color(0xffeb433a),
-            backgroundColorEnd: Color(0xff70f3ec),
+            backgroundColorStart: _isLoginForm ? Color(0xffeb433a): Color(0xff70f3ec),
+            backgroundColorEnd: _isLoginForm ? Color(0xffeb433a): Color(0xff70f3ec),
             flexibleSpace: SafeArea(
               child: Column(
                 children: <Widget>[
