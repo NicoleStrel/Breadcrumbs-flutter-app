@@ -215,6 +215,19 @@ class _ScanState extends State<ScanScreen> {
   Future scan() async {
     try {
       String barcode = await BarcodeScanner.scan(); //returns the userID!
+      QuerySnapshot querySnapshotTables = await Firestore.instance.collection("tables").where("name", isEqualTo: _selectedTable).limit(1).getDocuments();
+      var selectedTablesId = querySnapshotTables.documents[0].documentID;
+       print(_selectedTable);
+       print("CHEEKY CHEEKY");
+        await Firestore.instance.collection("tables").document(selectedTablesId).collection('customers').document(barcode).setData({
+        'visit_date': DateTime.now(),
+        'user': barcode
+      });
+      await Firestore.instance.collection('customers').document(barcode).collection("tables").document(selectedTablesId).setData({
+        'date_visited': DateTime.now(),
+        'table_metadata': querySnapshotTables.documents[0].data,
+        'table_id': selectedTablesId 
+      });
       String combined= 'Registered user ' +barcode;
       setState(() => this.barcode = combined); //register this info in the database here
     } on PlatformException catch (e) {
