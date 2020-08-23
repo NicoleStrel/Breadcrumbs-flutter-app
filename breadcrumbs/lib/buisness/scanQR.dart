@@ -26,7 +26,7 @@ class _ScanState extends State<ScanScreen> {
   List<String> _tables = []; //'Creative', 'Technology','Digital Marketing', 'Consulting', 'Tax Preparation', 'Public Relations'
   String _selectedTable;
   final users = Firestore.instance.collection('users');
-  final tables=Firestore.instance.collection("tables");
+  final tables = Firestore.instance.collection("tables");
 
 
   signOut() async {
