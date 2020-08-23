@@ -216,12 +216,15 @@ class _ScanState extends State<ScanScreen> {
     try {
       String barcode = await BarcodeScanner.scan(); //returns the userID!
       QuerySnapshot querySnapshotTables = await Firestore.instance.collection("tables").where("name", isEqualTo: _selectedTable).limit(1).getDocuments();
+      DocumentSnapshot querySnapshotCurrentUser = await Firestore.instance.collection("customers").document(barcode).get();
+      print(querySnapshotCurrentUser.data);
       var selectedTablesId = querySnapshotTables.documents[0].documentID;
        print(_selectedTable);
        print("CHEEKY CHEEKY");
         await Firestore.instance.collection("tables").document(selectedTablesId).collection('customers').document(barcode).setData({
         'visit_date': DateTime.now(),
-        'user': barcode
+        'user': barcode,
+        'user_metadata': querySnapshotCurrentUser.data
       });
       await Firestore.instance.collection('customers').document(barcode).collection("tables").document(selectedTablesId).setData({
         'date_visited': DateTime.now(),
