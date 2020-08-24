@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.fromLTRB(0.0, 00.0, 00.0, 40.0),
                     child: Text(
-                        '[Description/ intro goes here]',
+                        'Eat safely, and leave a healthy trail behind',
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis,
                       ),

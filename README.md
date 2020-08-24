@@ -1,9 +1,9 @@
 # Breadcrumbs-flutter-app
 
-A Covid-19 QR Code tracing app for restaurants.
+Eat safely, and leave a healthy trail behind.
 
 ### Steps to reproduce locally:
-(currently availible on ios)
+(currently availible on ios and works best on iphone 11)
 
 
 - Get the flutter SDK:
