@@ -10,12 +10,14 @@ Eat safely, and leave a healthy trail behind.
   - source: https://flutter.dev/docs/get-started/install/macos
 - Set up pods:
   - install pods `sudo gem install cocoapods`
-  - set up a Podfile `pod setup`
   - install dependancies `pod install`
   - update dependancies `pod update`
+- Fix issues: `flutter doctor`
 - Run project: `flutter run`
 
 ### Useful commands:
 - Update flutter packages (when new): `flutter packages get`
 - Open an ios simulator: `open -a Simulator`
 - Execute app on multiple devices:  `flutter run -d all`
+
+*Note:* Firebase connnection will not work (for security reasons) -> message us if you want to test this out and we will send you the instructions to do so. 
