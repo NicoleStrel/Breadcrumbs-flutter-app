@@ -4,6 +4,8 @@ import 'dart:ui';
 import 'package:flutter/rendering.dart';
 import 'package:breadcrumbs/authentication.dart';
 import 'package:animated_dialog_box/animated_dialog_box.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class GenerateScreen extends StatefulWidget {
   final BaseAuth auth;
@@ -172,7 +174,13 @@ class _GenerateScreenState extends State<GenerateScreen> {
   }
 }
 
-void showPopup(BuildContext context) async {
+Future showPopup(BuildContext context) async {
+  print("#####");
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  FirebaseUser user = await _firebaseAuth.currentUser();
+  print(user.uid);
+  print("#####");
+  await Firestore.instance.collection("customers").document(user.uid).updateData({"has_covid": true});
   await animated_dialog_box.showCustomAlertBox(
     context: context,
     firstButton:  Column(
@@ -197,6 +205,7 @@ void showPopup(BuildContext context) async {
         child: Text('Thank you for reporting. Take care and quarantine for two weeks.',
           textAlign: TextAlign.center),
       ));
+      
 }
 
 
